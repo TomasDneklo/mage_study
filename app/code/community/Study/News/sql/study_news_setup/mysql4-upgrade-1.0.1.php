@@ -9,10 +9,12 @@
  */
 $installer = $this;
 
-
 $installer->startSetup();
 
-$installer->getConnection()
+$tableName = $installer->getTable('study_news/news');
+
+$configTable = $installer->getConnection()
+    ->newTable($tableName)
     ->addColumn('meta_title', Varien_Db_Ddl_Table::TYPE_TEXT, 511, array(
         'nullable' => true,
         'default' => null
