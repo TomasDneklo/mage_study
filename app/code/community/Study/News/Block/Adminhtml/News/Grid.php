@@ -71,7 +71,17 @@ class Study_News_Block_Adminhtml_News_Grid
             'index' => 'created_at',
             'type' => 'datetime',
         ));
+/*
+        $this->addColumn('meta_title', array(
+            'header' => Mage::helper('study_news')->__('News Meta Title'),
+            'index' => 'meta_title',
+        ));
 
+        $this->addColumn('meta_description', array(
+            'header' => Mage::helper('study_news')->__('News Meta Description'),
+            'index' => 'meta_description',
+        ));
+*/
         $this->addColumn('action', array(
             'header' => Mage::helper('study_news')->__('Action'),
             'width' => '100px',
