@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Study_News>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Adminhtml />
+            </depends>
+        </Study_News>
+    </modules>
+    <global>
+    </global>
+</config>
