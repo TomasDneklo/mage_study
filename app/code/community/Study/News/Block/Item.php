@@ -13,6 +13,34 @@ class Study_News_Block_Item
     protected $_item;
 
     /**
+     * Layout edit Meta tags setting
+     */
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+
+        if ($headBlock = $this->getLayout()->getBlock('head')) {
+            $newsItem = Mage::helper('study_news')->getNewsItemInstance();
+
+            $headBlock->setTitle('test hardcoded');
+
+            if ($title = $newsItem->getMetaTitle()) {
+                $headBlock->setTitle($title);
+            }
+            if ($description = $newsItem->getMetaDescription()) {
+                $headBlock->setDescription($description);
+            }
+            /*
+            if ($keywords = $newsItem->getMetaKeywords()) {
+                $headBlock->setKeywords($keywords);
+            }
+            */
+        }
+
+        return $this;
+    }
+
+    /**
      * Return parameters for bace url
      *
      * @param array $additionalParams
@@ -38,7 +66,7 @@ class Study_News_Block_Item
     /**
      * Return URL for resized News Item image
      *
-     * @param Study_News_Model_news $item
+     * @param Study_News_Model_News $item
      * @param integer $width
      * @return string|false
      */
