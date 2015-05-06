@@ -22,8 +22,6 @@ class Study_News_Block_Item
         if ($headBlock = $this->getLayout()->getBlock('head')) {
             $newsItem = Mage::helper('study_news')->getNewsItemInstance();
 
-            $headBlock->setTitle('test hardcoded');
-
             if ($title = $newsItem->getMetaTitle()) {
                 $headBlock->setTitle($title);
             }
