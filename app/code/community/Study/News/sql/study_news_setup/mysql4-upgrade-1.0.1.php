@@ -13,7 +13,7 @@ $installer->startSetup();
 
 $tableName = $installer->getTable('study_news/news');
 
-$configTable = $installer->getConnection()
+$upgradeTable = $installer->getConnection()
     ->newTable($tableName)
     ->addColumn('meta_title', Varien_Db_Ddl_Table::TYPE_TEXT, 511, array(
         'nullable' => true,
@@ -25,6 +25,7 @@ $configTable = $installer->getConnection()
     ), 'News Meta Description')
 ;
 
+$installer->getConnection()->createTable($upgradeTable);
 
 $installer->endSetup();
 
