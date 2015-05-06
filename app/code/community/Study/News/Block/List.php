@@ -40,6 +40,9 @@ class Study_News_Block_List
 
     /**
      * Return URL to item's view page
+     *
+     * @param Study_News_Model_News $newsItem
+     * @return string
      */
     public function getItemURL($newsItem)
     {
