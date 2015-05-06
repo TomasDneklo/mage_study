@@ -44,14 +44,6 @@ $table = $installer->getConnection()
         'nullable' => true,
         'default'  => null,
     ), 'Creation Time')
-    ->addColumn('meta_title', Varien_Db_Ddl_Table::TYPE_TEXT, 511, array(
-        'nullable' => true,
-        'default' => null
-    ), 'News Meta Title')
-    ->addColumn('meta_description', Varien_Db_Ddl_Table::TYPE_TEXT, 1023, array(
-        'nullable' => true,
-        'default' => null
-    ), 'News Meta Description')
     ->addIndex($installer->getIdxName(
             $installer->getTable('study_news/news'),
             array('published_at'),
