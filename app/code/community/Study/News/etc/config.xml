@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Study_News>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </Study_News>
     </modules>
     <global>
@@ -43,6 +43,7 @@
             </study_news_setup>
         </resources>
 //-->
+
         <!-- from Dmitry START //-->
         <resources>
             <study_news_setup>
@@ -55,7 +56,6 @@
             </study_news_setup>
         </resources>
         <!-- from Dmitry END //-->
-
 
         <events>
             <before_news_item_display>

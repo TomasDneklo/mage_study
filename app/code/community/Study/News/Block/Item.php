@@ -21,12 +21,22 @@ class Study_News_Block_Item
 
         if ($headBlock = $this->getLayout()->getBlock('head')) {
             $newsItem = Mage::helper('study_news')->getNewsItemInstance();
-
+//var_dump($newsItem);
             if ($title = $newsItem->getMetaTitle()) {
                 $headBlock->setTitle($title);
+            } else {
+                $headBlock->setTitle(
+                    $newsItem->getTitle()
+                    . ' :: ' . $headBlock->getTitle()
+                );
             }
+
             if ($description = $newsItem->getMetaDescription()) {
                 $headBlock->setDescription($description);
+            } else {
+                $headBlock->setDescription(
+                    $headBlock->getTitle()
+                );
             }
             /*
             if ($keywords = $newsItem->getMetaKeywords()) {

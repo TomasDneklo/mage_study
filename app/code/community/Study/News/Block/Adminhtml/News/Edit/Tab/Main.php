@@ -11,7 +11,7 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Main
     /**
      * Prepare form element for tab
      *
-     * @return Mage_adminhtml_Block_Widget_Form
+     * @return Mage_Adminhtml_Block_Widget_Form
      */
     protected function _prepareForm()
     {

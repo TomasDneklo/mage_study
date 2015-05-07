@@ -42,7 +42,7 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Meta
             'disabled'  => $isElementDisabled
         ));
 
-        $fieldset->addField('meta_description', 'text', array(
+        $fieldset->addField('meta_description', 'textarea', array(
             'name' => 'meta_description',
             'label' => Mage::helper('study_news')->__('Meta Description'),
             'title' => Mage::helper('study_news')->__('Meta Description'),
