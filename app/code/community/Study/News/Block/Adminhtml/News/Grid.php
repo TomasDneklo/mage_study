@@ -51,6 +51,13 @@ class Study_News_Block_Adminhtml_News_Grid
             'index' => 'title',
         ));
 
+        $this->addColumn('seo_url', array(
+            'header' => Mage::helper('study_news')->__('SEO URL'),
+            'sortable' => true,
+            'index' => 'seo_url',
+            'type' => 'text',
+        ));
+
         $this->addColumn('author', array(
             'header' => Mage::helper('study_news')->__('Author'),
             'index' => 'author',

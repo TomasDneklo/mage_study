@@ -29,6 +29,18 @@ class Study_News_Model_News extends Mage_Core_Model_Abstract
     }
 
 
+    /**
+     * Check if news SEO URL exist for specific store
+     * return page id if page exists
+     *
+     * @param string $seo_url
+     * @return int
+     */
+    public function checkSeoUrl($seo_url)
+    {
+        return $this->_getResource()->getSeoUrl($seo_url);
+    }
+
 }
 
 

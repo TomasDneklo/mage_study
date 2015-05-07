@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Study_News>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </Study_News>
     </modules>
     <global>
@@ -66,6 +66,15 @@
                     </study_news>
                 </observers>
             </before_news_item_display>
+
+            <controller_front_init_routers>
+                <observers>
+                    <study_news>
+                        <class>Study_News_Controller_Router</class>
+                        <method>initControllerRouters</method>
+                    </study_news>
+                </observers>
+            </controller_front_init_routers>
         </events>
     </global>
     <frontend>
