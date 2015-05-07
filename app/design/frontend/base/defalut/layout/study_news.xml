@@ -4,7 +4,7 @@
  *Magento frontedn layout
  */
 -->
-<layout verssion="0.1.0">
+<layout version="0.1.0">
     <default>
         <reference name="footer_links">
             <action method="addLink" translate="label title"

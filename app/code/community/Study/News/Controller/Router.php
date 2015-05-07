@@ -62,15 +62,17 @@ class Study_News_Controller_Router
         }
 
         $seo_url = trim($request->getPathInfo(), '/');
-
+        /*
         $condition = new Varien_Object(array(
             'seo_url' => $seo_url,
             'continue'   => true
         ));
+
         Mage::dispatchEvent('news_controller_router_match_before', array(
             'router'    => $this,
             'condition' => $condition
         ));
+
         $seo_url = $condition->getSeoUrl();
 
         if ($condition->getRedirectUrl()) {
@@ -84,12 +86,10 @@ class Study_News_Controller_Router
         if (!$condition->getContinue()) {
             return false;
         }
+        */
 
         $news   = Mage::getModel('study_news/news');
         $newsId = $news->checkSeoUrl($seo_url);
-        if (!$newsId) {
-            return false;
-        }
 
         $request->setModuleName('news')
             ->setControllerName('news')

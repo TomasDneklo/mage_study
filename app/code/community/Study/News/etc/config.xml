@@ -61,7 +61,7 @@
             <before_news_item_display>
                 <observers>
                     <study_news>
-                        <class>study_news/observer</class>
+                        <class>Study_News_Model_Observer</class>
                         <method>beforeNewsDisplayed</method>
                     </study_news>
                 </observers>
