@@ -62,7 +62,7 @@
                 <observers>
                     <study_news>
                         <class>study_news/observer</class>
-                        <method>beforeNewsItemDisplayed</method>
+                        <method>beforeNewsDisplayed</method>
                     </study_news>
                 </observers>
             </before_news_item_display>
