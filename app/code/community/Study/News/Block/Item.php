@@ -21,6 +21,37 @@ class Study_News_Block_Item
 
         if ($headBlock = $this->getLayout()->getBlock('head')) {
             $newsItem = Mage::helper('study_news')->getNewsItemInstance();
+
+            // add home breadcrumbs
+            if ($breadcrumbs = $this->getLayout()->getBlock('breadcrumbs')) {
+                $breadcrumbs->addCrumb(
+                    'home',
+                    array(
+                        'label'=>Mage::helper('study_news')->__('Home'),
+                        'title'=>Mage::helper('study_news')->__('Go to Home Page'),
+                        'link'=>Mage::getBaseUrl(),
+                    )
+                );
+
+                // add news breadcrumb
+                $breadcrumbs->addCrumb(
+                    'list',
+                    array(
+                        'label'=>Mage::helper('study_news')->__('News'),
+                        'title'=>Mage::helper('study_news')->__('News Listing Page'),
+                        'link'=>Mage::getUrl('study_news'),
+                    )
+                );
+
+
+                // add news breadcrumb
+                $breadcrumbs->addCrumb(
+                    'news',
+                    array('label'=>$newsItem->getTitle())
+                );
+
+            }
+
             if ($title = $newsItem->getMetaTitle()) {
                 $headBlock->setTitle($title);
             } else {

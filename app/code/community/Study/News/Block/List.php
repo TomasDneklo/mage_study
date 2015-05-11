@@ -3,8 +3,7 @@
  * News List block
  */
 
-class Study_News_Block_List
-    extends Mage_Core_Block_Template
+class Study_News_Block_List extends Mage_Core_Block_Template
 {
     /**
      * News collection
@@ -12,6 +11,35 @@ class Study_News_Block_List
      * @var Study_News_Model_Resource_News_Collection
      */
     protected $_newsCollection = null;
+
+    /**
+     * Layout edit
+     */
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+
+        // add home breadcrumbs
+        if ($breadcrumbs = $this->getLayout()->getBlock('breadcrumbs')) {
+            $breadcrumbs->addCrumb(
+                'home',
+                array(
+                    'label' => Mage::helper('study_news')->__('Home'),
+                    'title' => Mage::helper('study_news')->__(
+                        'Go to Home Page'
+                    ),
+                    'link'  => Mage::getBaseUrl(),
+                )
+            );
+
+            // add news breadcrumb
+            $breadcrumbs->addCrumb(
+                'list',
+                array('label' => Mage::helper('study_news')->__('News'))
+            );
+        }
+
+    }
 
     /**
      * Retrieve news collection
