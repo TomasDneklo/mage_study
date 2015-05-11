@@ -39,6 +39,8 @@ class Study_News_IndexController
         $this->renderLayout();
     }
 
+
+
 }
 
 

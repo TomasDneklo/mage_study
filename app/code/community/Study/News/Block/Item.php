@@ -21,7 +21,6 @@ class Study_News_Block_Item
 
         if ($headBlock = $this->getLayout()->getBlock('head')) {
             $newsItem = Mage::helper('study_news')->getNewsItemInstance();
-var_dump($newsItem);
             if ($title = $newsItem->getMetaTitle()) {
                 $headBlock->setTitle($title);
             } else {
@@ -38,11 +37,6 @@ var_dump($newsItem);
                     $headBlock->getTitle()
                 );
             }
-            /*
-            if ($keywords = $newsItem->getMetaKeywords()) {
-                $headBlock->setKeywords($keywords);
-            }
-            */
         }
 
         return $this;

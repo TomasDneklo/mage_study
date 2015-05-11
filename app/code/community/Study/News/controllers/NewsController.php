@@ -30,11 +30,11 @@ class Study_News_NewsController
         Mage::register('news_item', $model);
 
         Mage::dispatchEvent('before_news_item_display', array('news_item' => $model));
-//var_export($model);
+
         $this->loadLayout();
 
         $itemBlock = $this->getLayout()->getBlock('news.item');
-//var_export($itemBlock);
+
         if($itemBlock){
             $listBlock = $this->getLayout()->getBlock('news.list');
             if($listBlock){

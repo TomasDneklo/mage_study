@@ -46,9 +46,8 @@ class Study_News_Block_List
      */
     public function getItemURL($newsItem)
     {
-        //var_dump($newsItem);
         if(!$newsItem->getSeoUrl()){
-            return $this->getUrl('*/*/view', array('id' => $newsItem->getId()));
+            return $this->getUrl('study_news/news/view', array('id' => $newsItem->getId()));
         } else {
             return $this->getUrl($newsItem->getSeoUrl());
         }
