@@ -26,5 +26,23 @@ class Study_News_Model_Resource_News_Collection
         $this->setCurPage($page)->setOrder('published_at', Varien_Data_Collection::SORT_ORDER_DESC);
         return $this;
     }
+
+    /**
+     * Add customer filter
+     *
+     * @param int $customerId
+     * @return Study_News_Model_Resourece_Like_Collection
+     */
+    public function addCustomerIdFilter($customerId)
+    {
+        $this->getSelect()
+            ->join(
+                array('snl' => $this->getTable('study_news/like')),
+                'main_table.news_id = snl.news_id',
+                array('snl.like_news_id AS like_id')
+            )
+            ->where('snl.customer_id = ?', $customerId);
+        return $this;
+    }
 }
 

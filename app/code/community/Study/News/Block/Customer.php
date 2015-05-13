@@ -19,20 +19,38 @@ class Study_News_Block_Customer
     {
         $this->_collection = Mage::getModel('study_news/news')->getCollection();
 
+        $customer_id = $this->getCustomer()->getId();
+
+        return $this->_collection->addCustomerIdFilter($customer_id);
     }
 
 
-   /**
+    /**
      * Return URL for delete action
      *
-     * @param Study_News_Model_Like $liked_news
+     * @param Study_News_Model_News $liked_news
      * @return string
      */
-    public function getDeleteUrl($liked_news)
+    public function getRemoveUrl($liked_news)
     {
         return $this->getUrl(
-            'news/customer/delete',
-            array('id' => $liked_news->getId())
+            'study_news/customer/remove',
+            array('id' => $liked_news->getLikeId())
+        );
+    }
+
+
+    /**
+     * Return URL for delete action
+     *
+     * @param Study_News_Model_News $liked_news
+     * @return string
+     */
+    public function getViewUrl($liked_news)
+    {
+        return $this->getUrl(
+            'study_news/news/view',
+            array('id' => $liked_news->getLikeId())
         );
     }
 
@@ -54,16 +72,6 @@ class Study_News_Block_Customer
     public function getCollection()
     {
         return $this->_getCollection();
-    }
-
-    public function getLiked(){
-        //$customer_id = $this->getCustomer()->getId();
-        //return $this->_collection->addCustomerFilter($customer_id);
-
-        // TODO - filter out collection by customer_id
-
-        return $this->_collection;
-
     }
 
 }

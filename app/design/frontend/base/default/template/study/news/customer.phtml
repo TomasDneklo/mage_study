@@ -17,17 +17,29 @@
 
 <div>
     <?php
-    if($this->getCollection()){
+    if($this->getCollection()->count() > 0){
         foreach($this->getCollection() as $news){
-// TODO - solve collection problem
     ?>
-        <div> [ <a href="<?php $this->getDeleteUrl($news);?>">
-                <?php echo Mage::helper('study_news')->__('DELETE'); ?>
-            </a> ]
-            <p><?php $news->getTitle(); ?></p>
+        <div>
+            <div>
+                <?php echo $news->getTitle(); ?>
+            </div>
+            <div>[
+                <a href="<?php echo $this->getRemoveUrl($news);?>">
+                    <?php echo Mage::helper('study_news')->__('REMOVE'); ?>
+                </a>
+                |
+                <a href="<?php echo $this->getViewUrl($news);?>">
+                    <?php echo Mage::helper('study_news')->__('VIEW'); ?>
+                </a>
+                ]</div>
         </div>
     <?php
         }
+    } else {
+    ?>
+        <div><?php echo Mage::helper('study_news')->__('No liked News'); ?></div>
+    <?php
     }
     ?>
 

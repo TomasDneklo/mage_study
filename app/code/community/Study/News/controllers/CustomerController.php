@@ -21,27 +21,38 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
     /**
      * Delete action
      */
-    public function deleteAction()
+    public function removeAction()
     {
         // check if we know what shoud be deleted
         // TODO - check if liked id belongs to customer
-        $likeItemId = $this->getRequest()->getParam('id');
-        if ($likeItemId) {
-
-            // init model and delete
-            /** @var $model Study_News_Model_Like */
-            $model = Mage::getModel('study_news/like');
-            $model->load($likeItemId);
-
-            if (!$model->getId()) {
-                Mage::log(Mage::helper('study_news')->__('Unabel to find a liked news.'));
+        $likedNewsId = $this->getRequest()->getParam('id');
+        if ($likedNewsId) {
+            if($this->_checkLikedNewsOwner($likedNewsId)){
+                $this->_removeNewsFromList($likedNewsId);
             }
-
-            $model->delete();
-
         }
 
         // go to 'back'
         $this->_redirectReferer();
+    }
+
+    protected function _removeNewsFromList($liked_news_id)
+    {
+        // init model and delete
+        /** @var $model Study_News_Model_Like */
+        $model = Mage::getModel('study_news/like');
+        $model->load($liked_news_id);
+
+        if (!$model->getId()) {
+            Mage::log(Mage::helper('study_news')->__('Unabel to find a liked news.'));
+        }
+
+        $model->delete();
+    }
+
+    protected function _checkLikedNewsOwner($liked_news_id)
+    {
+        // TODO - real check
+        return true;
     }
 }

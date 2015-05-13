@@ -13,7 +13,7 @@ $installer->startSetup();
 
 $table = $installer->getConnection()
     ->newTable($installer->getTable('study_news/like'))
-    ->addColumn('news_like_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+    ->addColumn('like_news_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'identity' => true,
         'unsigned' => true,
         'nullable' => false,
@@ -51,7 +51,15 @@ $table = $installer->getConnection()
         Varien_Db_Ddl_Table::ACTION_CASCADE,
         Varien_Db_Ddl_Table::ACTION_CASCADE
     )
-    ->getSchema()
+    ->addIndex(
+        $installer->getIdxName(
+            'study_news/like',
+            array('news_id', 'customer_id'),
+            Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
+        ),
+        array('news_id', 'customer_id'),
+        array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE)
+    )
     ->setComment('Customer Liked News');
 
 $installer->getConnection()->createTable($table);
