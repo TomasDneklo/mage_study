@@ -1,0 +1,34 @@
+<?php
+/**
+ * News template for list of customer liked news
+ */
+
+/**
+ * @var $this Study_News_Block_Customer
+ * @see Study_News_Block_Customer
+ */
+?>
+<div id="liked_news_list_messages"><?php echo $this->getMessagesBlock()
+        ->getGroupedHtml() ?></div>
+
+<div>
+    <h1><?php echo Mage::helper('study_news')->__('My Liked News') ?></h1>
+</div>
+
+<div>
+    <?php
+    if($this->getCollection()){
+        foreach($this->getCollection() as $news){
+// TODO - solve collection problem
+    ?>
+        <div> [ <a href="<?php $this->getDeleteUrl($news);?>">
+                <?php echo Mage::helper('study_news')->__('DELETE'); ?>
+            </a> ]
+            <p><?php $news->getTitle(); ?></p>
+        </div>
+    <?php
+        }
+    }
+    ?>
+
+</div>

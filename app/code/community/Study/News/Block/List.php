@@ -66,6 +66,7 @@ class Study_News_Block_List extends Mage_Core_Block_Template
         return $this->_newsCollection;
     }
 
+
     /**
      * Return URL to item's view page
      *

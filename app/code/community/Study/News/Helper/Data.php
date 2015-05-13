@@ -79,5 +79,7 @@ class Study_News_Helper_Data
         return $this->_newsItemInstance;
     }
 
+
+
 }
 

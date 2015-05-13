@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Study_News>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </Study_News>
     </modules>
     <global>
@@ -17,6 +17,9 @@
                     <news>
                         <table>study_news</table>
                     </news>
+                    <like>
+                        <table>study_news_like</table>
+                    </like>
                 </entities>
             </study_news_resource>
         </models>
@@ -29,6 +32,13 @@
             <study_news>
                 <class>Study_News_Block</class>
             </study_news>
+<!--
+            <customer>
+                <rewrite>
+                    <account_navigation>Study_News_Block</account_navigation>
+                </rewrite>
+            </customer>
+//-->
         </blocks>
 
 <!--

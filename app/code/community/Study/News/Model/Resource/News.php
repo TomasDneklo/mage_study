@@ -46,6 +46,7 @@ class Study_News_Model_Resource_News
             ->where('`seo_url` LIKE ?', $seo_url);
         return $select;
     }
+
 }
 
 

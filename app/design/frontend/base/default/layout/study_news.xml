@@ -46,7 +46,34 @@
         </reference>
         <reference name="content">
             <block type="study_news/item" name="news.item"
-               template="study/news/item.phtml" />
+                   template="study/news/item.phtml"/>
+            <block type="study_news/like" name="news.likeit" template="study/news/button/likeit.phtml" />
         </reference>
     </study_news_news_view>
+
+    <study_news_like_add>
+
+    </study_news_like_add>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>study_news</name>
+                <path>study_news/customer/index</path>
+                <label>My Liked News</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <study_news_customer_index translate="label">
+        <label>Customer My Account My Liked News Page</label>
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="study_news/customer" name="customer.news" template="study/news/customer.phtml" />
+            <block type="customer/account_dashboard" name="customer.account.link.back"
+                   template="customer/account/link/back.phtml"/>
+        </reference>
+    </study_news_customer_index>
+
+
 </layout>

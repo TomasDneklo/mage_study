@@ -1,0 +1,20 @@
+<?php
+/**
+ * Like button template for  news
+ */
+
+/**
+ * @var $this Study_News_Block_Customer
+ * @see Study_News_Block_Customer
+ */
+?>
+<form id="likeNews" action="<?php echo $this->getLikeItUrl(); ?>" method="get">
+    <div class="form-likeit">
+        <button type="submit" title="<?php echo $this->__('I Like It') ?>"
+                class="button">
+                <span>
+                    <span><?php echo $this->__('I Like It') ?></span>
+                </span>
+        </button>
+    </div>
+</form>

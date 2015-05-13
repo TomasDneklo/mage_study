@@ -103,8 +103,10 @@ class Study_News_Block_Item
      * @param integer $width
      * @return string|false
      */
-    public function getImageUrl($item, $width){
+    public function getImageUrl($item, $width)
+    {
         return Mage::helper('study_news/image')->resize($item, $width);
     }
+
 
 }
