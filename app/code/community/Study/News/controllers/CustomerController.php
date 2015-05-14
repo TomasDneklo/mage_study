@@ -36,12 +36,12 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
         $this->_redirectReferer();
     }
 
-    protected function _removeNewsFromList($liked_news_id)
+    protected function _removeNewsFromList($likedNewsId)
     {
         // init model and delete
         /** @var $model Study_News_Model_Like */
         $model = Mage::getModel('study_news/like');
-        $model->load($liked_news_id);
+        $model->load($likedNewsId);
 
         if (!$model->getId()) {
             Mage::log(Mage::helper('study_news')->__('Unabel to find a liked news.'));
@@ -50,8 +50,11 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
         $model->delete();
     }
 
-    protected function _checkLikedNewsOwner($liked_news_id)
+
+    protected function _checkLikedNewsOwner($likedNewsId)
     {
+        $likedNewsId;
+
         // TODO - real check
         return true;
     }

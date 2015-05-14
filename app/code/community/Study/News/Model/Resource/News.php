@@ -17,11 +17,10 @@ class Study_News_Model_Resource_News
 
 
     /**
-     * Check if news SEO URL is deffined for specific store
-     * return news id if page exists
+     * Check if news SEO URL is deffined for specific news
      *
      * @param string $seo_url
-     * @return int
+     * @return string
      */
     public function getSeoUrl($seo_url)
     {
@@ -34,7 +33,7 @@ class Study_News_Model_Resource_News
     }
 
     /**
-     * Retrieve load select with filter by identifier, store and activity
+     * Retrieve load select with filter by seo_url
      *
      * @param string $seo_url
      * @return Varien_Db_Select

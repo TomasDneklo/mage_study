@@ -40,23 +40,14 @@ class Study_News_NewsController
     public function likeAction()
     {
         if(Mage::getSingleton('customer/session')->isLoggedIn()) {
-            // init model and set data
-            /* @var $model Study_News_Model_News */
-            $model = Mage::getModel('study_news/like');
 
             // if news item exists, try to load it
             $newsId = $this->getRequest()->getParam('id');
-            $customer_id = Mage::getSingleton('customer/session')
-                ->getCustomerId();
-            $data = array(
-                'news_id'       => $newsId,
-                'customer_id'   => $customer_id,
-            );
+            $customerId = Mage::getSingleton('customer/session')->getCustomerId();
 
-            $model->addData($data);
-
-            // save the data
-            $model->save();
+            if(!$this->_checkAlreadyLiked($customerId, $newsId)){
+                $this->_saveLike($customerId, $newsId);
+            }
 
             // TODO - redirect after login to news not to referer
             $this->_redirectReferer();
@@ -66,6 +57,49 @@ class Study_News_NewsController
             $this->_redirect('customer/account');
         }
 
+    }
+
+    /**
+     * Save Like to DB
+     *
+     * @param int $customerId
+     * @param int $newsId
+     *
+     * @throws Exception
+     */
+    protected function _saveLike($customerId, $newsId)
+    {
+        // init model and set data
+        /* @var $model Study_News_Model_News */
+        $model = Mage::getModel('study_news/like');
+        $data = array(
+            'news_id'       => $newsId,
+            'customer_id'   => $customerId,
+        );
+
+        $model->addData($data);
+
+        // save the data
+        $model->save();
+    }
+
+
+    /**
+     * Check customer already liked news
+     *
+     * @param $customerId
+     * @param $newsId
+     *
+     * @return bool
+     */
+    protected function _checkAlreadyLiked($customerId, $newsId){
+        $model = Mage::getModel(('study_news/like'));
+
+        $status =  $model->checkCustomerLike($customerId, $newsId);
+
+        return $status;
+        // TODO - add real check
+        // return false;
     }
 
 

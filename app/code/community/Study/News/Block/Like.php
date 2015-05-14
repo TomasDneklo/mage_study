@@ -20,4 +20,21 @@ class Study_News_Block_Like extends Mage_Core_Block_Template
         );
 
     }
+
+    /**
+     * check alrady liked news
+     */
+    public function isLiked(){
+        if($customerId = Mage::getSingleton('customer/session')->getCustomerId()){
+
+            $newsId = $this->getRequest()->getParam('id');
+
+            /** @var @var $model Study_News_Model_Like */
+            $model = Mage::getModel('study_news/like');
+
+            $model->checkCustomerLike($customerId, $newsId);
+        } else {
+            return false;
+        }
+    }
 }
