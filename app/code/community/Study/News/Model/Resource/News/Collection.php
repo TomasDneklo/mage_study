@@ -28,7 +28,7 @@ class Study_News_Model_Resource_News_Collection
     }
 
     /**
-     * Add customer filter
+     * Add customer id filter
      *
      * @param int $customerId
      * @return Study_News_Model_Resourece_Like_Collection

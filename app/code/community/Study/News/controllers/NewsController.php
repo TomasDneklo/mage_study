@@ -39,20 +39,24 @@ class Study_News_NewsController
 
     public function likeAction()
     {
-        if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+        $newsId = $this->getRequest()->getParam('id');
 
-            // if news item exists, try to load it
-            $newsId = $this->getRequest()->getParam('id');
+        if(Mage::getSingleton('customer/session')->isLoggedIn()) {
             $customerId = Mage::getSingleton('customer/session')->getCustomerId();
 
             if(!$this->_checkAlreadyLiked($customerId, $newsId)){
                 $this->_saveLike($customerId, $newsId);
             }
 
-            // TODO - redirect after login to news not to referer
-            $this->_redirectReferer();
+            $redirectPath = 'study_news/news/view/';
+            $redirectParam = array('id' => $newsId);
+            $this->_redirect(
+                $redirectPath,
+                $redirectParam
+            );
+
         } else {
-            $this->_setRedirectAfterLogin();
+            $this->_setRedirectAfterLogin($newsId);
 
             $this->_redirect('customer/account');
         }
@@ -93,25 +97,21 @@ class Study_News_NewsController
      * @return bool
      */
     protected function _checkAlreadyLiked($customerId, $newsId){
-        $model = Mage::getModel(('study_news/like'));
+        /** @var @var $model Study_News_Model_Like */
+        $model = Mage::getModel('study_news/like');
 
-        $status =  $model->checkCustomerLike($customerId, $newsId);
-
-        return $status;
-        // TODO - add real check
-        // return false;
+        return $model->checkCustomerLike($customerId, $newsId);
     }
 
 
-    protected function _setRedirectAfterLogin(){
+    protected function _setRedirectAfterLogin($newsId){
         $session = Mage::getSingleton('customer/session');
-/*
-        if ($this->getRequest()->getRequestUri()){
-            $session->setAfterAuthUrl(Mage::getUrl($this->getRequest()
-                ->getRequestUri())
-            );
-        } else {*/
-            $session->setAfterAuthUrl(Mage::helper('core/http')->getHttpReferer());
- //       }
+
+        $redirectPath = 'study_news/news/like/';
+        $redirectParam = array('id' => $newsId);
+        $redirectUrl = Mage::getUrl($redirectPath, $redirectParam);
+
+        $session->setAfterAuthUrl($redirectUrl);
+
     }
 }

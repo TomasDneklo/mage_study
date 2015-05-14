@@ -1,6 +1,6 @@
 <?php
 /**
- * News item resource model
+ * Liked News collection
  */
 
 class Study_News_Model_Resource_Like_Collection
@@ -13,33 +13,5 @@ class Study_News_Model_Resource_Like_Collection
     {
         $this->_init('study_news/like');
     }
-
-    /**
-     * Add customer filter
-     *
-     * @param int $customerId
-     * @return Study_News_Model_Resourece_Like_Collection
-     */
-    public function addCustomerFilter($customerId)
-    {
-        $this->getSelect()
-            ->where('snl.customer_id = ?', $customerId);
-        return $this;
-    }
-
-    /**
-     * Prepare for displaying in list
-     *
-     * @param integer $page
-     * @return Study_News_Model_Resource_Like_Collection
-     */
-    /*
-    public function prepareForList($page)
-    {
-        $this->setPageSize(Mage::helper('study_news')->getNewsPerPage());
-        $this->setCurPage($page)->setOrder('published_at', Varien_Data_Collection::SORT_ORDER_DESC);
-        return $this;
-    }
-    */
 }
 

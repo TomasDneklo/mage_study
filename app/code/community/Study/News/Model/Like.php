@@ -20,10 +20,32 @@ class Study_News_Model_Like extends Mage_Core_Model_Abstract
      * @param int $newsId
      * @return bool
      */
+
     public function checkCustomerLike($customerId, $newsId)
     {
-        return $this->_getResource()->getCustomerLike($customerId, $newsId);
+        /** @var $collection Study_News_Model_Resource_Like_Collection */
+        $collection = $this->getCollection()
+            ->addFieldToFilter('customer_id', $customerId)
+            ->addFieldToFilter('news_id', $newsId)
+        ;
+
+        return (bool)$collection->getSize();
     }
 
+    /**
+     * Get status of news ownership check
+     *
+     * @param int $customerId
+     * @param int $likedNewsId
+     * @return bool
+     */
+    public function checkLikedNewsOwner($customerId, $likedNewsId)
+    {
+        /** @var $collection Study_News_Model_Resource_Like_Collection */
+        $collection = $this->getCollection()
+            ->addFieldToFilter('like_news_id', $likedNewsId);
+
+        return ($customerId ==  $collection->getFirstItem()->getCustomerId());
+    }
 }
 

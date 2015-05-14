@@ -24,7 +24,6 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
     public function removeAction()
     {
         // check if we know what shoud be deleted
-        // TODO - check if liked id belongs to customer
         $likedNewsId = $this->getRequest()->getParam('id');
         if ($likedNewsId) {
             if($this->_checkLikedNewsOwner($likedNewsId)){
@@ -36,6 +35,11 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
         $this->_redirectReferer();
     }
 
+    /**
+     * @param $likedNewsId
+     *
+     * @throws Exception
+     */
     protected function _removeNewsFromList($likedNewsId)
     {
         // init model and delete
@@ -51,11 +55,17 @@ class Study_News_CustomerController extends Mage_Core_Controller_Front_Action
     }
 
 
+    /**
+     * @param $likedNewsId
+     *
+     * @return bool
+     */
     protected function _checkLikedNewsOwner($likedNewsId)
     {
-        $likedNewsId;
+        $customerId = Mage::getSingleton('customer/session')->getCustomerId();
 
-        // TODO - real check
-        return true;
+        $model = Mage::getModel('study_news/like');
+
+        return $model->checkLikedNewsOwner($customerId, $likedNewsId);
     }
 }

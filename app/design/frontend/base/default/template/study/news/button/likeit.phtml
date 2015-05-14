@@ -4,12 +4,13 @@
  */
 
 /**
- * @var $this Study_News_Block_Customer
- * @see Study_News_Block_Customer
+ * @var $this Study_News_Block_Like
+ * @see Study_News_Block_Like
  */
 ?>
-<form id="likeNews" action="<?php echo $this->getLikeItUrl(); ?>" method="get">
-    <div class="form-likeit">
+<?php if(!$this->isLiked()){ ?>
+<form id="likeNews" action="<?php echo $this->getLikeItUrl(); ?>" method="get" class="block">
+    <div class="actions">
         <button type="submit" title="<?php echo $this->__('I Like It') ?>"
                 class="button">
                 <span>
@@ -18,3 +19,4 @@
         </button>
     </div>
 </form>
+<?php } ?>
