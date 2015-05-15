@@ -7,6 +7,30 @@
 class Study_News_Adminhtml_NewsController
     extends Mage_Adminhtml_Controller_Action
 {
+
+    /**
+     * @param string $idFieldName
+     *
+     * @return $this
+     */
+    protected function _initNews($idFieldName = 'news_id')
+    {
+        $this->_title($this->__('News'))->_title($this->__('News Customers'));
+
+        $newsId = (int) $this->getRequest()->getParam($idFieldName);
+
+        $news = Mage::getModel('study_news/news');
+
+        if ($newsId) {
+            $news->load($newsId);
+        }
+
+        Mage::register('study_news', $news);
+
+        return $this;
+    }
+
+
     /**
      * Init actions
      *
