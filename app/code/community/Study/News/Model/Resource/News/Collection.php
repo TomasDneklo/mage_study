@@ -31,7 +31,7 @@ class Study_News_Model_Resource_News_Collection
      * Add customer id filter
      *
      * @param int $customerId
-     * @return Study_News_Model_Resourece_Like_Collection
+     * @return Study_News_Model_Resourece_News_Collection
      */
     public function addCustomerIdFilter($customerId)
     {
@@ -42,6 +42,7 @@ class Study_News_Model_Resource_News_Collection
                 array('snl.like_news_id AS like_id')
             )
             ->where('snl.customer_id = ?', $customerId);
+
         return $this;
     }
 }

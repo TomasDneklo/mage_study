@@ -25,8 +25,8 @@ class Study_News_Model_Like extends Mage_Core_Model_Abstract
     {
         /** @var $collection Study_News_Model_Resource_Like_Collection */
         $collection = $this->getCollection()
-            ->addFieldToFilter('customer_id', $customerId)
-            ->addFieldToFilter('news_id', $newsId)
+            ->addCustomerIdFilter($customerId)
+            ->addNewsIdFilter($newsId)
         ;
 
         return (bool)$collection->getSize();
@@ -43,9 +43,10 @@ class Study_News_Model_Like extends Mage_Core_Model_Abstract
     {
         /** @var $collection Study_News_Model_Resource_Like_Collection */
         $collection = $this->getCollection()
-            ->addFieldToFilter('like_news_id', $likedNewsId);
+            ->addLikeNewsIdFilter($likedNewsId);
 
-        return ($customerId ==  $collection->getFirstItem()->getCustomerId());
+        return (bool)($customerId == $collection->getFirstItem()->getCustomerId());
     }
+
 }
 
