@@ -175,9 +175,9 @@ class Study_News_Adminhtml_NewsController
                 }
 
                 // save the data
-                $model->save();
+                $save = $model->save();
 
-                $this->_saveRelatedProducts($data);
+                $this->_saveRelatedProducts($save->getId());
 
                 // dispay success message
                 $this->_getSession()->addSuccess(
@@ -210,11 +210,29 @@ class Study_News_Adminhtml_NewsController
         $this->_redirect($redirectPath, $redirectParams);
     }
 
-    protected function _saveRelatedProducts($data){
+    /**
+     * Save related products
+     *
+     * @param int $newsId
+     */
+    protected function _saveRelatedProducts($newsId){
+        /*
         $model = Mage::getModel('study_news/product');
         $links = $this->getRequest()->getPost('links');
 
+        $data = array();
+        foreach($links AS $link){
+            $data[] = array(
+                'news_id'       => $newsId,
+                'product_id'    => $link->getProductId()
+            );
+        }
+        $model->addData($data);
+
+        $model->save();
+        */
     }
+
 
     /**
      * Delete action
