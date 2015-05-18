@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Study_News>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
         </Study_News>
     </modules>
     <global>
@@ -20,6 +20,9 @@
                     <like>
                         <table>study_news_like</table>
                     </like>
+                    <product>
+                        <table>study_news_product</table>
+                    </product>
                 </entities>
             </study_news_resource>
         </models>

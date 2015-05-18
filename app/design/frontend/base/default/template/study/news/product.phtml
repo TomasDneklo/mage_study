@@ -1,0 +1,26 @@
+<?php
+/**
+ * Like button template for  news
+ */
+
+/**
+ * @var $this Study_News_Block_Like
+ * @see Study_News_Block_Like
+ */
+?>
+
+<?php $_newsItem = $this->helper('study_news')->getNewsItemInstance(); ?>
+
+<?php
+if($related = $this->getCollection($_newsItem->getId())){
+    echo Mage::helper('study_news')->__('Related Products :');
+    foreach($related as $product){
+?>
+        <div>
+            <div><?php echo $product->getName(); ?></div>
+        </div>
+<?php
+    }
+?>
+
+<?php } ?>

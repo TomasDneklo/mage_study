@@ -25,10 +25,15 @@
                 <block type="study_news/adminhtml_news_edit_tab_content" name="news_edit_tab_content"/>
                 <block type="study_news/adminhtml_news_edit_tab_image" name="news_edit_tab_image"/>
                 <block type="study_news/adminhtml_news_edit_tab_seo" name="news_edit_tab_seo"/>
+                <block type="study_news/adminhtml_news_edit_tab_product" name="news_edit_tab_product"/>
                 <action method="addTab"><name>main_section</name><block>news_edit_tab_main</block></action>
                 <action method="addTab"><name>content_section</name><block>news_edit_tab_content</block></action>
                 <action method="addTab"><name>image_section</name><block>news_edit_tab_image</block></action>
                 <action method="addTab"><name>seo_section</name><block>news_edit_tab_seo</block></action>
+                <action method="addTab">
+                    <name>products_section</name>
+                    <block>news_edit_tab_product</block>
+                </action>
             </block>
         </reference>
     </adminhtml_news_edit>

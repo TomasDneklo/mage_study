@@ -48,7 +48,7 @@ class Study_News_Model_Resource_Like_Collection
      * @return Study_News_Model_Resource_Like_Collection $this
      */
     public function addLikeNewsIdFilter($likeNewsId){
-        $this->addFieldToFilter('news_id', $likeNewsId);
+        $this->addFieldToFilter('like_news_id', $likeNewsId);
 
         return $this;
     }

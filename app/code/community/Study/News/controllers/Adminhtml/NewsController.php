@@ -13,9 +13,9 @@ class Study_News_Adminhtml_NewsController
      *
      * @return $this
      */
-    protected function _initNews($idFieldName = 'news_id')
+    protected function _initNews($idFieldName = 'id')
     {
-        $this->_title($this->__('News'))->_title($this->__('News Customers'));
+        $this->_title($this->__('News'))->_title($this->__('News'));
 
         $newsId = (int) $this->getRequest()->getParam($idFieldName);
 
@@ -25,7 +25,7 @@ class Study_News_Adminhtml_NewsController
             $news->load($newsId);
         }
 
-        Mage::register('study_news', $news);
+        Mage::register('current_study_news', $news);
 
         return $this;
     }
@@ -49,6 +49,10 @@ class Study_News_Adminhtml_NewsController
                 Mage::helper('study_news')->__('Manage News'),
                 Mage::helper('study_news')->__('Manage News')
             );
+
+        // need manual initialization ?
+        $this->_initNews();
+
         return $this;
     }
 
@@ -173,6 +177,8 @@ class Study_News_Adminhtml_NewsController
                 // save the data
                 $model->save();
 
+                $this->_saveRelatedProducts($data);
+
                 // dispay success message
                 $this->_getSession()->addSuccess(
                     Mage::helper('study_news')->__('The news item has been saved.')
@@ -202,6 +208,12 @@ class Study_News_Adminhtml_NewsController
         }
 
         $this->_redirect($redirectPath, $redirectParams);
+    }
+
+    protected function _saveRelatedProducts($data){
+        $model = Mage::getModel('study_news/product');
+        $links = $this->getRequest()->getPost('links');
+
     }
 
     /**
