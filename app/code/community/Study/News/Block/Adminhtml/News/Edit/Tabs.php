@@ -18,4 +18,18 @@ class Study_News_Block_Adminhtml_News_Edit_Tabs
         $this->setDestElementId('edit_form');
         $this->setTitle(Mage::helper('study_news')->__('News Item Info'));
     }
+/*
+    public function _prepareLayout()
+    {
+
+
+        $this->addTab('related', array(
+            'label'     => Mage::helper('catalog')->__('Related Products'),
+            'url'       => $this->getUrl('study_news/edit/product', array('_current' => true)),
+            'class'     => 'ajax',
+        ));
+
+        return parent::_prepareLayout();
+    }
+*/
 }

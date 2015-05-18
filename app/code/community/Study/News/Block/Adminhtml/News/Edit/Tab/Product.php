@@ -119,7 +119,7 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
             'header_css_class'  => 'a-center',
             'type'              => 'checkbox',
             'name'              => 'in_products',
-            'values'            => $this->_getSelectedProductsIds(),
+            'values'            => $this->getSelectedProductsIds(),
             'align'             => 'center',
             'index'             => 'entity_id'
         ));
@@ -191,23 +191,11 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
     }
 
     /**
-     * Rerieve grid URL
-     *
-     * @return string
-     */
-    public function getGridUrl()
-    {
-        return $this->getData('grid_url')
-            ? $this->getData('grid_url')
-            : $this->getUrl('*/*/relatedGrid', array('_current' => true));
-    }
-
-    /**
      * Retrieve selected related products
      *
      * @return array
      */
-    protected function _getSelectedProductsIds()
+    public function getSelectedProductsIds()
     {
         $newsId = $this->_getNews()->getId();
         $selected = Mage::getModel('study_news/product')->getRelationsIds($newsId);
@@ -216,6 +204,17 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
     }
 
 
+
+    public function getTabClass()
+    {
+        return 'ajax';
+    }
+
+
+    public function getTabUrl()
+    {
+        return $this->getUrl('*/*/product', array('_current' => true));
+    }
 
     /**
      * Prepare label for tab
