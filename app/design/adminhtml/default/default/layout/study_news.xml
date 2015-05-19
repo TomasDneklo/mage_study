@@ -39,6 +39,11 @@
                 </action>
                 <!--
                 //-->
+
+                <block type="study_news/adminhtml_news_edit_tab_products" name="news_edit_tab_products">
+                    <action method="setClass"><class>ajax</class></action>
+                </block>
+                <action method="addTab"><name>products_section2</name><block>news_edit_tab_products</block></action>
             </block>
 <!--
             <block type="adminhtml/catalog_product_edit_js" template="catalog/product/js.phtml" name="catalog_product_js"></block>
@@ -95,4 +100,31 @@
         </adminhtml_news_relatedgrid>
 
 //-->
+
+
+    <adminhtml_news_products>
+        <block type="core/text_list" name="root">
+            <block type="study_news/adminhtml_news_edit_tab_products_grid" name="news_products"/>
+            <block type="adminhtml/widget_grid_serializer" name="brand_products_serializer">
+                <reference name="brand_products_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>news_products</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>links[products]</hidden_input_name>
+                        <reload_param_name>products_related</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_news_products>
+
+    <adminhtml_news_productsgrid>
+        <block type="core/text_list" name="root">
+            <block type="study_news/adminhtml_news_edit_tab_products_grid" name="product_section"/>
+        </block>
+    </adminhtml_news_productsgrid>
+
 </layout>

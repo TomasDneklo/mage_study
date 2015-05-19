@@ -326,6 +326,30 @@ class Study_News_Adminhtml_NewsController
         $this->renderLayout();
     }
 
+    public function productsAction()
+    {
+        $this->_initNews();
+
+        if (!Mage::registry('current_study_news') || !Mage::registry('current_study_news')->getId()) {
+            return $this->_redirect('*/*/');
+        }
+        $this->loadLayout();
+        $this->renderLayout();
+        return $this;
+    }
+
+    public function productsgridAction()
+    {
+        $this->_initNews();
+
+        if (!Mage::registry('current_study_news') || !Mage::registry('current_study_news')->getId()) {
+            return $this->_redirect('*/*/');
+        }
+        $this->loadLayout();
+        $this->renderLayout();
+        return $this;
+    }
+
     /**
      * Flush News Posts Images Cache action
      */
