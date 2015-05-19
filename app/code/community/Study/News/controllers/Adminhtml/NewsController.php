@@ -64,6 +64,7 @@ class Study_News_Adminhtml_NewsController
             ->_title($this->__('Manage News'));
 
         $this->_initAction();
+
         $this->renderLayout();
     }
 
@@ -216,21 +217,35 @@ class Study_News_Adminhtml_NewsController
      * @param int $newsId
      */
     protected function _saveRelatedProducts($newsId){
-        /*
+        $this->_deleteRelatedProducts($newsId);
+
         $model = Mage::getModel('study_news/product');
-        $links = $this->getRequest()->getPost('links');
+        $related = $this->getRequest()->getPost('related');
 
-        $data = array();
-        foreach($links AS $link){
-            $data[] = array(
+        //$data = array();
+        foreach($related AS $key => $relatedId){
+            $data = array(
                 'news_id'       => $newsId,
-                'product_id'    => $link->getProductId()
+                'product_id'    => $relatedId
             );
-        }
-        $model->addData($data);
+            $model->addData($data);
 
+        }
         $model->save();
-        */
+
+    }
+
+
+    protected function _deleteRelatedProducts($newsId){
+        $model = Mage::getModel('study_news/product');
+
+        if($relations = $model->getRelationsIds($newsId)){
+            foreach($relations as $relatedId){
+                $model->load($relatedId);
+                $model->delete();
+            }
+        }
+
     }
 
 
@@ -322,5 +337,35 @@ class Study_News_Adminhtml_NewsController
             $this->_getSession()->addError('There was error during flushing cache');
         }
         $this->_forward('index');
+    }
+
+
+    /**
+     * Get related products grid and serializer block
+     */
+    public function productAction()
+    {
+        //$this->_initProduct();
+        $this->loadLayout();
+
+        $this->getLayout()->getBlock('catalog.product.edit.tab.related')
+            ->setProductsRelated(array())
+        ;
+
+        //die('die');
+        $this->renderLayout();
+    }
+
+    /**
+     * Get related products grid
+     */
+    public function productGridAction()
+    {
+        //$this->_initProduct();
+        $this->loadLayout();
+        $this->getLayout()->getBlock('catalog.product.edit.tab.related')
+            //->setProductsRelated($this->getRequest()->getPost('products_related', null))
+        ;
+        $this->renderLayout();
     }
 }

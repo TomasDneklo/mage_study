@@ -16,6 +16,7 @@
 
     <adminhtml_news_edit>
         <update handle="editor" />
+
         <reference name="content">
             <block type="study_news/adminhtml_news_edit" name="news_edit"/>
         </reference>
@@ -26,6 +27,8 @@
                 <block type="study_news/adminhtml_news_edit_tab_image" name="news_edit_tab_image"/>
                 <block type="study_news/adminhtml_news_edit_tab_seo" name="news_edit_tab_seo"/>
                 <block type="study_news/adminhtml_news_edit_tab_product" name="news_edit_tab_product"/>
+                <!--
+                //-->
                 <action method="addTab"><name>main_section</name><block>news_edit_tab_main</block></action>
                 <action method="addTab"><name>content_section</name><block>news_edit_tab_content</block></action>
                 <action method="addTab"><name>image_section</name><block>news_edit_tab_image</block></action>
@@ -33,20 +36,26 @@
                 <action method="addTab">
                     <name>products_section</name>
                     <block>news_edit_tab_product</block>
-
                 </action>
+                <!--
+                //-->
             </block>
+<!--
+            <block type="adminhtml/catalog_product_edit_js" template="catalog/product/js.phtml" name="catalog_product_js"></block>
+            <block type="study_news/adminhtml_edit_js" template="study/news/edit/js.phtml" name="news_edit_js"></block>
+//-->
+
         </reference>
     </adminhtml_news_edit>
 
     <adminhtml_news_product>
         <block type="core/text_list" name="root" output="toHtml">
-            <block type="adminhtml/catalog_product_edit_tab_related" name="catalog.product.edit.tab.related"/>
+            <block type="adminhtml/study_news_edit_tab_product" name="product_section"/>
             <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
                 <reference name="related_grid_serializer">
                     <action method="initSerializerBlock">
-                        <grid_block_name>catalog.product.edit.tab.related</grid_block_name>
-                        <data_callback>getSelectedRelatedProducts</data_callback>
+                        <grid_block_name>study_news_edit_tab_product</grid_block_name>
+                        <data_callback>getSelectedProductsIds</data_callback>
                         <hidden_input_name>links[related]</hidden_input_name>
                         <reload_param_name>products_related</reload_param_name>
                     </action>
@@ -57,4 +66,33 @@
             </block>
         </block>
     </adminhtml_news_product>
+<!--
+        <adminhtml_news_related>
+
+            <block type="core/text_list" name="root" output="toHtml">
+                <block type="adminhtml/catalog_product_edit_tab_related" name="catalog.product.edit.tab.related"/>
+                <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                    <reference name="related_grid_serializer">
+                        <action method="initSerializerBlock">
+                            <grid_block_name>catalog.product.edit.tab.related</grid_block_name>
+                            <data_callback>getSelectedRelatedProducts</data_callback>
+                            <hidden_input_name>links[related]</hidden_input_name>
+                            <reload_param_name>products_related</reload_param_name>
+                        </action>
+                        <action method="addColumnInputName">
+                            <input_name>position</input_name>
+                        </action>
+                    </reference>
+                </block>
+            </block>
+
+        </adminhtml_news_related>
+
+        <adminhtml_news_relatedgrid>
+            <block type="core/text_list" name="root" output="toHtml">
+                <block type="adminhtml/catalog_product_edit_tab_related" name="catalog.product.edit.tab.related"/>
+            </block>
+        </adminhtml_news_relatedgrid>
+
+//-->
 </layout>

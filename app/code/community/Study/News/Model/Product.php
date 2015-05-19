@@ -50,19 +50,35 @@ class Study_News_Model_Product extends Mage_Core_Model_Abstract
     }
 
     /**
-     * Retrieve related products
+     * Retrieve list of product IDs of related products
      *
      * @param int $newsId
      *
-     * @return array
+     * @return array array of Products IDs
      */
-    public function getRelationsIds($newsId)
+    public function getRelatedProductsIds($newsId)
     {
         $products = array();
         foreach ($this->getRelatedCollection($newsId) as $relation) {
             $products[] = $relation->getProductId();
         }
         return $products;
+    }
+
+    /**
+     * Retrieve list of Relation IDs or related products
+     *
+     * @param int $newsId
+     *
+     * @return array array of relations IDs
+     */
+    public function getRelationsIds($newsId)
+    {
+        $relations = array();
+        foreach ($this->getRelatedCollection($newsId) as $relation) {
+            $relations[] = $relation->getProductRelationId();
+        }
+        return $relations;
     }
 
 

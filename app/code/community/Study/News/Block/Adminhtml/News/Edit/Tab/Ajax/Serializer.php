@@ -31,11 +31,12 @@
  * @package    Mage_Adminhtml
  * @author     Magento Core Team <core@magentocommerce.com>
  */
-class Study_News_Block_Adminhtml_News_Edit_Tab_Ajax_Serializer
-    extends Mage_Core_Block_Template
+class Study_News_Block_Adminhtml_News_Edit_Tab_Ajax_Serializer extends Mage_Core_Block_Template
 {
     public function _construct()
     {
+        die('die call in: '. __CLASS__);
+
         parent::_construct();
         $this->setTemplate('catalog/product/edit/serializer.phtml');
         return $this;
@@ -63,10 +64,13 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Ajax_Serializer
      */
     public function initSerializerBlock($blockName, $getProductFunction, $inputName)
     {
+        die('die call in: '. __CLASS__);
+        /*
         if ($block = $this->getLayout()->getBlock($blockName)) {
             $this->setGridBlock($block)
                 ->setProducts(Mage::registry('current_product')->$getProductFunction())
                 ->setInputElementName($inputName);
         }
+        */
     }
 }

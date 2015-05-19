@@ -81,23 +81,14 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
         $collection = Mage::getModel('catalog/product_link')
             ->useRelatedLinks()
             ->getProductCollection()
-            ->addAttributeToSelect('*');
+            ->addAttributeToSelect('*')
+        ;
+
 
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
-    /**
-     * Checks when this block is readonly
-     *
-     * @return boolean
-     */
-/*
-     public function isReadonly()
-    {
-        return $this->_getNews()->getRelatedReadonly();
-    }
-*/
     /**
      * Add columns to grid
      *
@@ -106,24 +97,15 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
     protected function _prepareColumns()
     {
 
-/*
-        $fieldset->addField('seo_url', 'text', array(
-            'name' => 'seo_url',
-            'label' => Mage::helper('study_news')->__('SEO URL'),
-            'title' => Mage::helper('study_news')->__('SEO URL'),
-            'disabled' => $isElementDisabled
-        ));
-*/
-
         $this->addColumn('in_products', array(
             'header_css_class'  => 'a-center',
             'type'              => 'checkbox',
             'name'              => 'in_products',
             'values'            => $this->getSelectedProductsIds(),
             'align'             => 'center',
+            'field_name'        => 'related[]',
             'index'             => 'entity_id'
         ));
-
 
         $this->addColumn('entity_id', array(
             'header'    => Mage::helper('catalog')->__('ID'),
@@ -198,23 +180,23 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Product
     public function getSelectedProductsIds()
     {
         $newsId = $this->_getNews()->getId();
-        $selected = Mage::getModel('study_news/product')->getRelationsIds($newsId);
+        $selected = Mage::getModel('study_news/product')->getRelatedProductsIds($newsId);
 
         return $selected;
     }
 
 
-
+/*
     public function getTabClass()
     {
         return 'ajax';
     }
+*/
 
-
-    public function getTabUrl()
-    {
-        return $this->getUrl('*/*/product', array('_current' => true));
-    }
+//    public function getTabUrl()
+//    {
+//        return $this->getUrl('*/*/product', array('_current' => true));
+//    }
 
     /**
      * Prepare label for tab

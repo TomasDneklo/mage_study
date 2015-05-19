@@ -111,6 +111,7 @@
     <admin>
         <routers>
             <adminhtml>
+                <use>admin</use>
                 <args>
                     <modules>
                         <Study_News before="Mage_adminhtml">Study_News_adminhtml</Study_News>
