@@ -3,7 +3,7 @@
  *
  */
 
-class Study_News_Block_Product extends Mage_Core_Block_Template
+class Study_News_Block_Product extends Mage_Catalog_Block_Product_Abstract
 {
     /**
      * Related Products collection
@@ -57,4 +57,6 @@ class Study_News_Block_Product extends Mage_Core_Block_Template
 
         return $this->_productCollection;
     }
+
+
 }

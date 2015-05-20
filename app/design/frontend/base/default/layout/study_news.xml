@@ -47,8 +47,17 @@
         <reference name="content">
             <block type="study_news/item" name="news.item"
                    template="study/news/item.phtml"/>
-            <block type="study_news/like" name="news.likeit" template="study/news/button/likeit.phtml" />
-            <block type="study_news/product" name="news.product" template="study/news/product.phtml" />
+            <block type="study_news/like" name="news.likeit" template="study/news/button/likeit.phtml"/>
+            <block type="study_news/product" name="news.product" template="study/news/product.phtml"/>
+
+<!--
+            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
+            <block type="catalog/product_list" name="search_result_list"
+                   template="catalog/product/list.phtml">
+
+            </block>
+//-->
+
         </reference>
     </study_news_news_view>
 
