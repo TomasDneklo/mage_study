@@ -45,5 +45,18 @@ class Study_News_Model_Resource_News_Collection
 
         return $this;
     }
+
+
+
+    public function addPublishToFilter($to = false)
+    {
+        $to = $to ? $to : date("Y-m-d");
+
+        $this->addFieldToFilter('published_at',
+                array('to' => $to )
+            );
+
+        return $this;
+    }
 }
 

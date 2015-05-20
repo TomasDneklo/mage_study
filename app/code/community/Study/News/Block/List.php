@@ -48,7 +48,8 @@ class Study_News_Block_List extends Mage_Core_Block_Template
      */
     protected function _getCollection()
     {
-        return Mage::getResourceModel('study_news/news_collection');
+        return Mage::getResourceModel('study_news/news_collection')
+            ->addPublishToFilter();
     }
 
     /**
