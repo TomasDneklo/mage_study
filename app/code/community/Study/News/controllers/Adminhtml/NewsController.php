@@ -50,7 +50,6 @@ class Study_News_Adminhtml_NewsController
                 Mage::helper('study_news')->__('Manage News')
             );
 
-        // need manual initialization ?
         $this->_initNews();
 
         return $this;
@@ -178,7 +177,7 @@ class Study_News_Adminhtml_NewsController
                 // save the data
                 $save = $model->save();
 
-                $this->_saveRelatedProducts($save->getId());
+                $this->_updateRelatedProducts($save->getId());
 
                 // dispay success message
                 $this->_getSession()->addSuccess(
@@ -211,31 +210,52 @@ class Study_News_Adminhtml_NewsController
         $this->_redirect($redirectPath, $redirectParams);
     }
 
+
     /**
-     * Save related products
+     * Update related products
      *
      * @param int $newsId
      */
-    protected function _saveRelatedProducts($newsId){
-        $this->_deleteRelatedProducts($newsId);
+    protected function _updateRelatedProducts($newsId){
 
+        //@var $collection Study_News_Model_Resource_Product_Collection
+        $collection = Mage::getResourceModel('study_news/product_collection');
+
+        //@var $model Study_News_Model_Product
         $model = Mage::getModel('study_news/product');
+
         $related = $this->getRequest()->getPost('related');
+        $productsIdsInDB = $model->getRelatedProductsIds($newsId);
 
-        //$data = array();
-        foreach($related AS $key => $relatedId){
-            $data = array(
-                'news_id'       => $newsId,
-                'product_id'    => $relatedId
-            );
-            $model->addData($data);
-
+        foreach($productsIdsInDB AS $productId){
+            if(!in_array($productId, $related)){
+                $collection->getItemByColumnValue('product_id', $productId)->isDeleted(true);
+            }
         }
-        $model->save();
 
+        foreach($related AS $key => $productId){
+            if(!in_array($productId, $productsIdsInDB)){
+                $data = array(
+                    'news_id'       => $newsId,
+                    'product_id'    => $productId
+                );
+
+                $item = Mage::getModel('study_news/product');
+                $item->addData($data);
+                
+                $collection->addItem($item);
+            }
+        }
+
+        $collection->save();
     }
 
 
+    /**
+     * @param $newsId
+     *
+     * @throws Exception
+     */
     protected function _deleteRelatedProducts($newsId){
         $model = Mage::getModel('study_news/product');
 
@@ -367,6 +387,7 @@ class Study_News_Adminhtml_NewsController
     /**
      * Get related products grid and serializer block
      */
+    /*
     public function productAction()
     {
         //$this->_initProduct();
@@ -379,10 +400,12 @@ class Study_News_Adminhtml_NewsController
         //die('die');
         $this->renderLayout();
     }
+    */
 
     /**
      * Get related products grid
      */
+    /*
     public function productGridAction()
     {
         //$this->_initProduct();
@@ -392,4 +415,33 @@ class Study_News_Adminhtml_NewsController
         ;
         $this->renderLayout();
     }
+    */
+
+    public function relatedAction()
+    {
+        $this->_initNews();
+
+        if (!Mage::registry('current_study_news') || !Mage::registry('current_study_news')->getId()) {
+            return $this->_redirect('*/*/');
+        }
+        $this->loadLayout();
+        $this->renderLayout();
+
+        return $this;
+
+    }
+
+    public function relatedgridAction()
+    {
+        $this->_initNews();
+
+        if (!Mage::registry('current_study_news') || !Mage::registry('current_study_news')->getId()) {
+            return $this->_redirect('*/*/');
+        }
+        $this->loadLayout();
+        $this->renderLayout();
+
+        return $this;
+    }
+
 }
