@@ -174,10 +174,10 @@ class Study_News_Adminhtml_NewsController
                     $model->setImage($imageFile);
                 }
 
+                $model->setData('related', $this->getRequest()->getParam('related'));
+
                 // save the data
                 $model->save();
-
-                $this->_updateRelatedProducts($model->getId());
 
                 // dispay success message
                 $this->_getSession()->addSuccess(
@@ -208,38 +208,6 @@ class Study_News_Adminhtml_NewsController
         }
 
         $this->_redirect($redirectPath, $redirectParams);
-    }
-
-
-    /**
-     * Update related products
-     *
-     * @param int $newsId
-     */
-    protected function _updateRelatedProducts($newsId)
-    {
-        /* @var Study_News_Model_Resource_Product_Collection $productCollection */
-        $productCollection = Mage::getModel('study_news/product')->getRelatedCollection($newsId);
-
-        $related = $this->getRequest()->getPost('related');
-        foreach ($productCollection as $item) {
-            if (!in_array($item->getProductId(), $related)) {
-                $item->isDeleted(true);
-            }
-            $related = array_diff($related, array($item->getProductId()));
-        }
-
-        foreach ($related as $productId) {
-            $item = Mage::getModel('study_news/product');
-            $item->setData(
-                array(
-                    'news_id'    => $newsId,
-                    'product_id' => $productId,
-                )
-            );
-            $productCollection->addItem($item);
-        }
-        $productCollection->save();
     }
 
 

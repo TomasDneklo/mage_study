@@ -28,6 +28,31 @@ class Study_News_Model_News extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    protected function _afterSave(){
+        $productCollection = Mage::getModel('study_news/product')
+            ->getRelatedCollection($this->getId());
+
+        $related = $this->getData('related');
+        foreach ($productCollection as $item) {
+            if (!in_array($item->getProductId(), $related)) {
+                $item->isDeleted(true);
+            }
+            $related = array_diff($related, array($item->getProductId()));
+        }
+
+        foreach ($related as $productId) {
+            $item = Mage::getModel('study_news/product');
+            $item->setData(
+                array(
+                    'news_id'    => $this->getId(),
+                    'product_id' => $productId,
+                )
+            );
+            $productCollection->addItem($item);
+        }
+        $productCollection->save();
+    }
+
 
     /**
      * Check if news SEO URL exist for specific store
