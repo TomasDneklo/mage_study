@@ -175,9 +175,9 @@ class Study_News_Adminhtml_NewsController
                 }
 
                 // save the data
-                $save = $model->save();
+                $model->save();
 
-                $this->_updateRelatedProducts($save->getId());
+                $this->_updateRelatedProducts($model->getId());
 
                 // dispay success message
                 $this->_getSession()->addSuccess(
@@ -216,38 +216,30 @@ class Study_News_Adminhtml_NewsController
      *
      * @param int $newsId
      */
-    protected function _updateRelatedProducts($newsId){
-
-        //@var $collection Study_News_Model_Resource_Product_Collection
-        $collection = Mage::getResourceModel('study_news/product_collection');
-
-        //@var $model Study_News_Model_Product
-        $model = Mage::getModel('study_news/product');
+    protected function _updateRelatedProducts($newsId)
+    {
+        /* @var Study_News_Model_Resource_Product_Collection $productCollection */
+        $productCollection = Mage::getModel('study_news/product')->getRelatedCollection($newsId);
 
         $related = $this->getRequest()->getPost('related');
-        $productsIdsInDB = $model->getRelatedProductsIds($newsId);
-
-        foreach($productsIdsInDB AS $productId){
-            if(!in_array($productId, $related)){
-                $collection->getItemByColumnValue('product_id', $productId)->isDeleted(true);
+        foreach ($productCollection as $item) {
+            if (!in_array($item->getProductId(), $related)) {
+                $item->isDeleted(true);
             }
+            $related = array_diff($related, array($item->getProductId()));
         }
 
-        foreach($related AS $key => $productId){
-            if(!in_array($productId, $productsIdsInDB)){
-                $data = array(
-                    'news_id'       => $newsId,
-                    'product_id'    => $productId
-                );
-
-                $item = Mage::getModel('study_news/product');
-                $item->addData($data);
-                
-                $collection->addItem($item);
-            }
+        foreach ($related as $productId) {
+            $item = Mage::getModel('study_news/product');
+            $item->setData(
+                array(
+                    'news_id'    => $newsId,
+                    'product_id' => $productId,
+                )
+            );
+            $productCollection->addItem($item);
         }
-
-        $collection->save();
+        $productCollection->save();
     }
 
 
