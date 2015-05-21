@@ -5,7 +5,8 @@
             <active>true</active>
             <codePool>community</codePool>
             <depends>
-                <Mage_Adminhtml />
+                <Mage_Adminhtml/>
+                <Mage_Cms />
             </depends>
         </Study_News>
     </modules>
