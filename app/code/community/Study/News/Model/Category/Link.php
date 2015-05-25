@@ -70,7 +70,7 @@ class Study_News_Model_Category_Link extends Mage_Core_Model_Abstract
     public function getLinkedNewsIds($categoryId)
     {
         $links = array();
-        foreach ($this->getLinkedCategoryCollection($categoryId) as $link) {
+        foreach ($this->getLinkedNewsCollection($categoryId) as $link) {
             $links[] = $link->getNewsId();
         }
         return $links;

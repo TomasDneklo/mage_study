@@ -25,7 +25,7 @@ class Study_News_Adminhtml_CategoryController
             $category->load($categoryId);
         }
 
-        Mage::register('current_study_news_cateogry', $category);
+        Mage::register('current_study_news_category', $category);
 
         return $this;
     }

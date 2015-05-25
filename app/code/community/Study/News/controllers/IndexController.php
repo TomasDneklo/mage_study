@@ -58,19 +58,18 @@ class Study_News_IndexController
 
 
         $this->loadLayout();
-        /*
-                $listBlock = $this->getLayout()->getBlock('news.list');
 
+        $listBlock = $this->getLayout()->getBlock('news.list');
 
-                        if($listBlock){
-                            $currentPage = abs(intval($this->getRequest()->getParam('p')));
+        if($listBlock){
+            $currentPage = abs(intval($this->getRequest()->getParam('p')));
 
-                            if($currentPage < 1){
-                                $currentPage = 1;
-                            }
-                            $listBlock->setCurrentPage($currentPage);
-                        }
-                */
+            if($currentPage < 1){
+                $currentPage = 1;
+            }
+            $listBlock->setCurrentPage($currentPage);
+        }
+
         $this->renderLayout();
     }
 

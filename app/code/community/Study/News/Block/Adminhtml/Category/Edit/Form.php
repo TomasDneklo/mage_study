@@ -12,7 +12,7 @@ class Study_News_Block_Adminhtml_Category_Edit_Form
      */
     protected function _getCategory()
     {
-        return Mage::registry('current_news_category');
+        return Mage::registry('current_study_news_category');
     }
 
     /**
@@ -98,7 +98,13 @@ class Study_News_Block_Adminhtml_Category_Edit_Form
 
     protected function _getLinkedNewsIds()
     {
+        $linked = array();
+        if($categoryId = $this->_getCategory()->getId()) {
+            $linked = Mage::getModel('study_news/category_link')
+                ->getLinkedNewsIds($categoryId);
+        }
 
+        return $linked;
     }
 }
 
