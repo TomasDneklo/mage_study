@@ -10,12 +10,14 @@ class Study_News_Helper_Admin
     /**
      * Check permission for passed action
      *
+     * @param string $controller
      * @param string $action
      * @return bool
      */
-    public function isActionAllowed($action)
+    public function isActionAllowed($controller, $action)
     {
-        return Mage::getSingleton('admin/session')->isAllowed('news/manage/' . $action);
+        return Mage::getSingleton('admin/session')
+            ->isAllowed('news/' . $controller . '/' . $action);
     }
 }
 

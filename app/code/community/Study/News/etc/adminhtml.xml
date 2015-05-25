@@ -5,11 +5,16 @@
             <title>News</title>
             <sort_order>65</sort_order>
             <children>
-                <manage translate="title" module="study_news">
+                <news translate="title" module="study_news">
                     <title>Manage News</title>
                     <action>adminhtml/news</action>
                     <sort_order>50</sort_order>
-                </manage>
+                </news>
+                <category translate="title" module="study_news">
+                    <title>Manage News Categories</title>
+                    <action>adminhtml/category</action>
+                    <sort_order>100</sort_order>
+                </category>
             </children>
         </news>
     </menu>
@@ -22,7 +27,7 @@
                         <title>News</title>
                         <sort_order>65</sort_order>
                         <children>
-                            <manage translate="title">
+                            <news translate="title">
                                 <title>Manage News</title>
                                 <sort_order>0</sort_order>
                                 <children>
@@ -35,7 +40,21 @@
                                         <sort_order>10</sort_order>
                                     </delete>
                                 </children>
-                            </manage>
+                            </news>
+                            <category translate="title">
+                                <title>Manage News Categorires</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save Category</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete Category</title>
+                                        <sort_order>10</sort_order>
+                                    </delete>
+                                </children>
+                            </category>
                         </children>
                     </news>
                     <system>

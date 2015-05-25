@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Study_News>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </Study_News>
     </modules>
     <global>
@@ -23,6 +23,12 @@
                     <product>
                         <table>study_news_product</table>
                     </product>
+                    <category>
+                        <table>study_news_category</table>
+                    </category>
+                    <category_link>
+                        <table>study_news_category_link</table>
+                    </category_link>
                 </entities>
             </study_news_resource>
         </models>
@@ -30,32 +36,20 @@
             <study_news>
                 <class>Study_News_Helper</class>
             </study_news>
+<!-- not sure about following block //-->
+            <news>
+                <class>Study_News_Helper</class>
+            </news>
         </helpers>
         <blocks>
             <study_news>
                 <class>Study_News_Block</class>
             </study_news>
-<!--
-            <customer>
-                <rewrite>
-                    <account_navigation>Study_News_Block</account_navigation>
-                </rewrite>
-            </customer>
-//-->
+<!-- not sure about following block //-->
+            <news>
+                <class>Study_News_Block</class>
+            </news>
         </blocks>
-
-<!--
-        <resources>
-            <study_news_setup>
-                <setup>
-                    <module>
-                        Study_News
-                    </module>
-                    <class>Mage_Core_Model_Resource_Setup</class>
-                </setup>
-            </study_news_setup>
-        </resources>
-//-->
 
         <!-- from Dmitry START //-->
         <resources>

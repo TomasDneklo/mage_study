@@ -1,9 +1,9 @@
 <?php
 /**
- * News like resurce model
+ * News category resurce model
  */
 
-class Study_News_Model_Resource_Like
+class Study_News_Model_Resource_Category
     extends Mage_Core_Model_Resource_Db_Abstract
 {
     /**
@@ -11,7 +11,7 @@ class Study_News_Model_Resource_Like
      */
     protected function _construct()
     {
-        $this->_init('study_news/like', 'like_news_id');
+        $this->_init('study_news/category', 'category_id');
     }
 
 }

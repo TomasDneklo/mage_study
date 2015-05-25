@@ -29,6 +29,13 @@ class Study_News_Helper_Data
     protected $_newsItemInstance;
 
     /**
+     * News Category instance for lazy loading
+     *
+     * @var Study_News_Model_Category
+     */
+    protected $_newsCategoryInstance;
+
+    /**
      * Checks whether news can be displayed in the frontend
      *
      * @param integer|string|Mage_Core_Model_Store $store
@@ -40,7 +47,7 @@ class Study_News_Helper_Data
     }
 
     /**
-     * Retur the number of items per page
+     * Return the number of items per page
      *
      * @param integer|string|Mage_Core_Model_Store $store
      * @return int
@@ -62,7 +69,7 @@ class Study_News_Helper_Data
     }
 
     /**
-     * Return current news item instace from the registry
+     * Return current news item instance from the registry
      *
      * @return Study_News_Model_News
      */
@@ -72,11 +79,29 @@ class Study_News_Helper_Data
             $this->_newsItemInstance = Mage::registry('news_item');
 
             if(!$this->_newsItemInstance){
-                Mage::throwException($this->__('News item instace does not exist in Registry'));
+                Mage::throwException($this->__('News item instance does not exist in Registry'));
             }
         }
 
         return $this->_newsItemInstance;
+    }
+
+    /**
+     * Return current news category instance from the registry
+     *
+     * @return Study_News_Model_Category
+     */
+    public function getNewsCategoryInstance()
+    {
+        if(!$this->_newsCategoryInstance){
+            $this->_newsCategoryInstance = Mage::registry('news_category');
+
+            if(!$this->_newsCategoryInstance){
+                Mage::throwException($this->__('News category instance does not exist in Registry'));
+            }
+        }
+
+        return $this->_newsCategoryInstance;
     }
 
 

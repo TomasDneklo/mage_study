@@ -1,0 +1,39 @@
+<?php
+/**
+ * Category link template for news item
+ */
+
+/**
+ * @var $this Study_News_Block_Item_Category
+ * @see Study_News_Block_Item_Category
+ */
+?>
+<?php
+$categoryCollection = $this->getLlinkedCategories();
+
+if($categoryCollection->getSize()) {
+?>
+<div class="block block-tags">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Categories'); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="tags-list">
+<?php
+    foreach($categoryCollection AS $category){
+?>
+                <li>
+                    <a href="<?php echo $this->getSearchUrl($category); ?>">
+                        <?php echo $category->getName(); ?>
+                    </a>
+                </li>
+<?php
+    }
+?>
+        </ul>
+    </div>
+</div>
+
+<?php
+}
+?>

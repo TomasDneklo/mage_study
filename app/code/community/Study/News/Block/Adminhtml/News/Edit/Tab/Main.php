@@ -8,6 +8,12 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Main
     extends Mage_Adminhtml_Block_Widget_Form
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
+
+    protected function _getNews()
+    {
+        return Mage::registry('current_study_news');
+    }
+
     /**
      * Prepare form element for tab
      *
@@ -20,7 +26,7 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Main
         /**
          * Checking if user have permission to save information
          */
-        if(Mage::helper('study_news/admin')->isActionAllowed('save')){
+        if(Mage::helper('study_news/admin')->isActionAllowed('news', 'save')){
             $isElementDisabled = false;
         } else {
             $isElementDisabled = true;
@@ -66,12 +72,48 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Main
             'required'  => true
         ));
 
+        $fieldset->addField('category', 'multiselect', array(
+            'name'      => 'category',
+            'label'     => Mage::helper('study_news')->__('Categories'),
+            'title'     => Mage::helper('study_news')->__('Categories'),
+            'field_name'=> 'category[]',
+            'values'    => $this->_loadCategories(),
+            'value'     => $this->_loadLinkedCategoriesIds(),
+        ));
+
+
         Mage::dispatchEvent('adminhtml_news_edit_tab_main_prepare_form', array('form' => $form));
 
         $form->setValues($model->getData());
         $this->setForm($form);
 
         return parent::_prepareForm();
+    }
+
+    protected function _loadCategories()
+    {
+        $categoryCollection = Mage::getModel('study_news/category')->getCollection();
+        $categoryCollection->setOrder('name', 'asc');
+
+        $categories = array();
+
+        foreach($categoryCollection AS $category){
+            $categories[] = array(
+                'value' => $category->getId(),
+                'label' => $category->getName()
+            );
+        }
+
+        return $categories;
+    }
+
+    protected function _loadLinkedCategoriesIds()
+    {
+        $newsId = $this->_getNews()->getId();
+        $linked = Mage::getModel('study_news/category_link')
+            ->getLinkedCategoriesIds($newsId);
+
+        return $linked;
     }
 
     /**

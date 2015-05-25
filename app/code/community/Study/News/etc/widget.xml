@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <widgets>
-    <study_news_lastnews type="study_news/lastnews">
+    <news_lastnews type="news/lastnews">
         <name>Last News</name>
         <description type="desc">List of Last 3 News</description>
-    </study_news_lastnews>
+    </news_lastnews>
 </widgets>

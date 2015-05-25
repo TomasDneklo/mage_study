@@ -1,0 +1,21 @@
+<?php
+/**
+ * Category link template for news item
+ */
+
+/**
+ * @var $this Study_News_Block_Item_Category
+ * @see Study_News_Block_Item_Category
+ */
+?>
+
+
+<?php $_newsCategory = $this->helper('study_news')->getNewsCategoryInstance(); ?>
+
+<?php
+echo Mage::helper('study_news')
+    ->__('List of News in `%s` category.' , $_newsCategory->getName());
+
+//$this->setLinkedNews($_newsCategory);
+?>
+

@@ -6,7 +6,10 @@
             <codePool>community</codePool>
             <depends>
                 <Mage_Adminhtml/>
-                <Mage_Cms />
+                <Mage_Cms/>
+                <Mage_Core/>
+                <Mage_Widget/>
+                <Mage_Catalog/>
             </depends>
         </Study_News>
     </modules>

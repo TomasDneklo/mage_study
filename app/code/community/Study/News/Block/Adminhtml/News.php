@@ -19,7 +19,7 @@ class Study_News_Block_Adminhtml_News
 
         parent::__construct();
 
-        if(Mage::helper('study_news/admin')->isActionAllowed('save'))
+        if(Mage::helper('study_news/admin')->isActionAllowed('news', 'save'))
         {
             $this->_updateButton('add', 'label',
                 Mage::helper('study_news')->__('Add New News'));

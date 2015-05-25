@@ -40,7 +40,7 @@ class Study_News_Adminhtml_NewsController
     {
         //load layout, set active menu and breadcrumbs
         $this->loadLayout()
-            ->_setActiveMenu('news/manage')
+            ->_setActiveMenu('news/news')
             ->_addBreadcrumb(
                     Mage::helper('study_news')->__('News'),
                     Mage::helper('study_news')->__('News')
@@ -175,6 +175,7 @@ class Study_News_Adminhtml_NewsController
                 }
 
                 $model->setData('related', $this->getRequest()->getParam('related'));
+                $model->setData('category', $this->getRequest()->getParam('category'));
 
                 // save the data
                 $model->save();
@@ -208,24 +209,6 @@ class Study_News_Adminhtml_NewsController
         }
 
         $this->_redirect($redirectPath, $redirectParams);
-    }
-
-
-    /**
-     * @param $newsId
-     *
-     * @throws Exception
-     */
-    protected function _deleteRelatedProducts($newsId){
-        $model = Mage::getModel('study_news/product');
-
-        if($relations = $model->getRelationsIds($newsId)){
-            foreach($relations as $relatedId){
-                $model->load($relatedId);
-                $model->delete();
-            }
-        }
-
     }
 
 
@@ -274,13 +257,13 @@ class Study_News_Adminhtml_NewsController
         switch ($this->getRequest()->getActionName()){
             case 'new':
             case 'save':
-                return Mage::getSingleton('Admin/session')->isAllowed('news/manage/save');
+                return Mage::getSingleton('Admin/session')->isAllowed('news/news/save');
                 break;
             case 'delete':
-                return Mage::getSingleton('Admin/session')->isAllowed('news/manage/delete');
+                return Mage::getSingleton('Admin/session')->isAllowed('news/news/delete');
                 break;
             default:
-                return Mage::getSingleton('Admin/session')->isAllowed('news/manage');
+                return Mage::getSingleton('Admin/session')->isAllowed('news/news');
                 break;
         }
     }
@@ -342,40 +325,6 @@ class Study_News_Adminhtml_NewsController
         }
         $this->_forward('index');
     }
-
-
-    /**
-     * Get related products grid and serializer block
-     */
-    /*
-    public function productAction()
-    {
-        //$this->_initProduct();
-        $this->loadLayout();
-
-        $this->getLayout()->getBlock('catalog.product.edit.tab.related')
-            ->setProductsRelated(array())
-        ;
-
-        //die('die');
-        $this->renderLayout();
-    }
-    */
-
-    /**
-     * Get related products grid
-     */
-    /*
-    public function productGridAction()
-    {
-        //$this->_initProduct();
-        $this->loadLayout();
-        $this->getLayout()->getBlock('catalog.product.edit.tab.related')
-            //->setProductsRelated($this->getRequest()->getPost('products_related', null))
-        ;
-        $this->renderLayout();
-    }
-    */
 
     public function relatedAction()
     {

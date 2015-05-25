@@ -31,7 +31,7 @@ class Study_News_Model_Resource_News_Collection
      * Add customer id filter
      *
      * @param int $customerId
-     * @return Study_News_Model_Resourece_News_Collection
+     * @return Study_News_Model_Resource_News_Collection
      */
     public function addCustomerIdFilter($customerId)
     {
@@ -58,5 +58,26 @@ class Study_News_Model_Resource_News_Collection
 
         return $this;
     }
+
+
+    /**
+     * Add Category ID filter
+     *
+     * @param int $categoryId
+     * @return Study_News_Model_Resource_News_Collection
+     */
+    public function addCategoryIdFilter($categoryId)
+    {
+        $this->getSelect()
+            ->join(
+                array('sncl' => $this->getTable('study_news/category_link')),
+                'main_table.news_id = sncl.news_id',
+                array('')
+            )
+            ->where('sncl.category_id = ?', $categoryId);
+
+        return $this;
+    }
+
 }
 

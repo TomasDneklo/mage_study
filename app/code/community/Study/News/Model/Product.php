@@ -1,6 +1,6 @@
 <?php
 /**
- * Like News model
+ * News Product Relation model
  */
 class Study_News_Model_Product extends Mage_Core_Model_Abstract
 {
@@ -11,27 +11,6 @@ class Study_News_Model_Product extends Mage_Core_Model_Abstract
     {
         $this->_init('study_news/product');
     }
-
-
-    /**
-     * Get status of news exitence in DB
-     *
-     * @param int $customerId
-     * @param int $newsId
-     * @return bool
-     */
-/*
-    public function checkCustomerLike($customerId, $newsId)
-    {
-        // @var $collection Study_News_Model_Resource_Product_Collection
-        $collection = $this->getCollection()
-            ->addCustomerIdFilter($customerId)
-            ->addNewsIdFilter($newsId)
-        ;
-
-        return (bool)$collection->getSize();
-    }
-*/
 
     /**
      * Get related news collection

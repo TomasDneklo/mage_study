@@ -1,6 +1,6 @@
 <?php
 /**
- * News item resurce model
+ * News Related Product resurce model
  */
 
 class Study_News_Model_Resource_Product

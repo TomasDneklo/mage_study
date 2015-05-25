@@ -33,7 +33,7 @@ class Study_News_Block_Adminhtml_News_Edit_Tab_Content
         /**
          * Checking if user have permission to save information
          */
-        if(Mage::helper('study_news/admin')->isActionAllowed('save')){
+        if(Mage::helper('study_news/admin')->isActionAllowed('news', 'save')){
             $isElementDisabled = false;
         } else {
             $isElementDisabled = true;
